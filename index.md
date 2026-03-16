@@ -1,16 +1,28 @@
 ---
-layout: home
-title: 세미나 목록
+layout: page
+title: 전체 세미나 목록
 ---
 
-## 📅 세미나별 자료 보기
+# 📅 세미나 아카이브
+새로운 폴더가 추가되면 자동으로 업데이트됩니다.
 
-{% for file in site.static_files %}
-  {% if file.path contains '/seminar-' %}
+<ul>
+  {% assign static_files = site.static_files | sort: 'path' | reverse %}
+  {% assign displayed_dirs = "" %}
+
+  {% for file in static_files %}
+    {% if file.path contains '/20' %}
+      {% assign parts = file.path | split: '/' %}
+      {% assign dir_name = parts[1] %}
+      
+      {% unless displayed_dirs contains dir_name %}
+        <li>
+          <a href="{{ site.baseurl }}/{{ dir_name }}/" style="font-weight: bold; font-size: 1.1em;">
+            {{ dir_name | replace: 'seminar-', '' | replace: '-', ' ' | upcase }}
+          </a>
+        </li>
+        {% assign displayed_dirs = displayed_dirs | append: dir_name | append: "," %}
+      {% endunless %}
     {% endif %}
-{% endfor %}
-
-* [2024 신기술 세미나](./seminar-2024-tech/)
-* [Delphi Spring Camp](./seminar-delphi-spring/)
-
-> 각 폴더로 들어가시면 PDF 및 예제 코드를 받으실 수 있습니다.
+  {% endfor %}
+</ul>
