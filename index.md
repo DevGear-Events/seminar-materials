@@ -1,6 +1,16 @@
-# DevGear Seminar Materials
+---
+layout: home
+title: 세미나 목록
+---
 
-환영합니다! 아래에서 각 세미나별 발표 자료를 확인할 수 있습니다.
+## 📅 세미나별 자료 보기
 
-## 2026년 세미나
-- [2026-03-11 세미나](/2026-03-11/"AI 덕분에 해낼 수 있게 된 것들-양용성.md")
+{% for file in site.static_files %}
+  {% if file.path contains '/seminar-' %}
+    {% endif %}
+{% endfor %}
+
+* [2024 신기술 세미나](./seminar-2024-tech/)
+* [Delphi Spring Camp](./seminar-delphi-spring/)
+
+> 각 폴더로 들어가시면 PDF 및 예제 코드를 받으실 수 있습니다.
